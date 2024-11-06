@@ -4,8 +4,8 @@ from typing import List
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
-from db import User, Server
-from i18n import i18n
+from db.db import User, Server
+from locales.strings import i18n
 
 
 def change_lang_keyboard() -> InlineKeyboardMarkup:
@@ -39,7 +39,7 @@ def chunkify(my_list, n):
 def server_keyboard(user: User, servers: List[Server]) -> InlineKeyboardMarkup:
     builder = InlineKeyboardBuilder()
     servers = list(map(lambda x: x["id"], servers))
-    servers.remove("n-hongkong")
+    # servers.remove("n-hongkong")
 
     builder.row(
         InlineKeyboardButton(
@@ -103,6 +103,13 @@ def plan_keyboard(user: User) -> InlineKeyboardMarkup:
         InlineKeyboardButton(
             text=i18n("buy_360_day", user["lang"]), callback_data="buy:360"
         ),
+    )
+
+    builder.row(
+        InlineKeyboardButton(
+            text=i18n("fragment", user["lang"]),
+            url="https://fragment.com/stars",
+        )
     )
 
     builder.row(

@@ -1,17 +1,17 @@
-from motor.motor_asyncio import AsyncIOMotorClient
-from dotenv import dotenv_values
-from typing import TypedDict, List, Dict
-from datetime import datetime, timedelta
-from shortuuid import uuid
 from uuid import uuid4
+from shortuuid import uuid
+from datetime import datetime, timedelta
+from typing import TypedDict, List, Dict
 
+from motor.motor_asyncio import AsyncIOMotorClient
 
-env = dotenv_values("../.env")
+from config.settings import config
 
 
 class UserDates(TypedDict):
     created_at: datetime
     sub_until: datetime
+
 
 class User(TypedDict):
     id: int
@@ -20,6 +20,7 @@ class User(TypedDict):
     configs: Dict[str, str]
     server: str | None
     lang: str
+
 
 class Server(TypedDict):
     id: str
@@ -35,8 +36,8 @@ class Promo(TypedDict):
 
 class Database:
     def __init__(self) -> None:
-        self.cli = AsyncIOMotorClient(env["MONGO_URI"])
-        self.db = self.cli.get_database(env["DB_NAME"])
+        self.cli = AsyncIOMotorClient(config.mongo_uri.get_secret_value())
+        self.db = self.cli.get_database(config.db_name.get_secret_value())
         self.users = self.db.get_collection("users")
         self.servers = self.db.get_collection("servers")
         self.promos = self.db.get_collection("promos")
@@ -52,20 +53,17 @@ class Database:
 
         if not promoDoc:
             return 0
-        
+
         await self.promos.delete_one({"id": promo})
 
         await self.give_sub_to_user(user, timedelta(days=promoDoc["days"]))
 
         return promoDoc["days"]
-    
+
     async def gen_promos(self, days: int, count: int) -> List[Promo]:
         promos = []
         for _ in range(count):
-            promos.append({
-                "id": str(uuid4()),
-                "days": days
-            })
+            promos.append({"id": str(uuid4()), "days": days})
 
         await self.promos.insert_many(promos)
 
@@ -73,71 +71,43 @@ class Database:
 
     async def server_list(self) -> List[Server]:
         l = []
-        cursor = self.servers.find({ "enabled": True })
+        cursor = self.servers.find({"enabled": True})
 
         async for server in cursor:
             l.append(server)
 
         return l
-    
+
     async def set_server(self, user: User, id: str):
-        await self.users.update_one(
-            {
-                "_id": user["_id"]
-            },
-            {
-                "$set": {
-                    "server": id
-                }
-            }
-        )
-    
+        await self.users.update_one({"_id": user["_id"]}, {"$set": {"server": id}})
+
     def user_have_sub(self, user: User) -> bool:
         return user["dates"]["sub_until"] > datetime.now()
-    
+
     async def set_lang(self, user: User, lang: str):
-        await self.users.update_one(
-            {
-                "_id": user["_id"]
-            },
-            {
-                "$set": {
-                    "lang": lang
-                }
-            }
-        )
+        await self.users.update_one({"_id": user["_id"]}, {"$set": {"lang": lang}})
 
     async def give_sub_to_user(self, user: User, delta: timedelta):
         start_time = datetime.now()
 
         if user["dates"]["sub_until"] > start_time:
             start_time = user["dates"]["sub_until"]
-        
+
         await self.users.update_one(
-            {
-                "_id": user["_id"]
-            },
-            {
-                "$set": {
-                    "dates.sub_until": start_time + delta
-                }
-            }
+            {"_id": user["_id"]}, {"$set": {"dates.sub_until": start_time + delta}}
         )
 
     async def get_or_create_user(self, id: int) -> User:
-        user = await self.users.find_one({ "id": id })
+        user = await self.users.find_one({"id": id})
 
         if not user:
             user = {
                 "id": id,
                 "token": uuid(),
-                "dates": {
-                    "created_at": datetime.now(),
-                    "sub_until": datetime.now()
-                },
+                "dates": {"created_at": datetime.now(), "sub_until": datetime.now()},
                 "configs": {},
                 "server": "n-best",
-                "lang": "ru"
+                "lang": "ru",
             }
 
             await self.users.insert_one(user)

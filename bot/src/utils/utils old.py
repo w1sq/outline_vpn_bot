@@ -1,8 +1,8 @@
 from aiogram import Bot, types
 
-from db import Database
-from keyboards import *
-from i18n import i18n
+from bot.src.db.db import Database
+from bot.src.keyboards.markup import *
+from bot.src.locales.strings import i18n
 from uuid import uuid4
 
 
@@ -20,9 +20,7 @@ class Utils:
         await self.db.get_or_create_user(user_id)
 
         await self.bot.send_photo(
-            user_id,
-            types.FSInputFile("images/hello.png"),
-            reply_markup=change_lang_keyboard(),
+            user_id, self.banner("hello"), reply_markup=change_lang_keyboard()
         )
 
         if isinstance(event, types.Message):
@@ -35,9 +33,7 @@ class Utils:
         user = await self.db.get_or_create_user(user_id)
 
         await self.bot.send_photo(
-            user_id,
-            types.FSInputFile("images/subscription.png"),
-            reply_markup=plan_keyboard(user),
+            user_id, self.banner("sub"), reply_markup=plan_keyboard(user)
         )
 
         await query.message.delete()
@@ -49,7 +45,7 @@ class Utils:
 
         await self.bot.send_photo(
             user_id,
-            types.FSInputFile("images/location.png"),
+            self.banner("location"),
             reply_markup=server_keyboard(user, servers),
         )
 
@@ -69,7 +65,7 @@ class Utils:
 
         await self.bot.send_photo(
             user_id,
-            types.FSInputFile("images/connect.png"),
+            self.banner("connect"),
             caption=i18n("connect_menu", user["lang"], token=user["token"]),
             reply_markup=back_keyboard(user),
         )
@@ -113,7 +109,7 @@ class Utils:
 
         await self.bot.send_photo(
             user_id,
-            types.FSInputFile("images/menu.png"),
+            self.banner("menu"),
             caption=i18n(
                 tkey,
                 user["lang"],

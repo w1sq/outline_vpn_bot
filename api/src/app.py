@@ -1,12 +1,12 @@
 import os
 import asyncio
-import aiohttp
 from datetime import datetime
 from dotenv import load_dotenv
 
+import aiohttp
+import haversine
 from pymongo import MongoClient
 from outline_vpn.outline_vpn import OutlineVPN
-import haversine
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 

@@ -2,31 +2,31 @@ links = {
     "guide-ios": {
         "ru": "https://telegra.ph/IOS---nastrojka-na-iPhoneiPad-08-08",
         "en": "https://telegra.ph/IOS---Setup-on-iPhoneiPad-08-08",
-        "cn": "https://telegra.ph/%E5%B8%B8%E8%A6%8B%E5%95%8F%E9%A1%8C%E8%A7%A3%E7%AD%94-08-08"
+        "cn": "https://telegra.ph/%E5%B8%B8%E8%A6%8B%E5%95%8F%E9%A1%8C%E8%A7%A3%E7%AD%94-08-08",
     },
     "guide-android": {
         "ru": "https://telegra.ph/Android---nastrojka-na-Android-ustrojstvah-08-08",
         "en": "https://telegra.ph/Android---customization-on-Android-devices-08-08",
-        "cn": "https://telegra.ph/%E5%AE%89%E5%8D%93---%E5%AE%9A%E5%88%B6%E5%AE%89%E5%8D%93%E8%AE%BE%E5%A4%87-08-08"
+        "cn": "https://telegra.ph/%E5%AE%89%E5%8D%93---%E5%AE%9A%E5%88%B6%E5%AE%89%E5%8D%93%E8%AE%BE%E5%A4%87-08-08",
     },
     "guide-pc": {
         "ru": "https://telegra.ph/Personalnye-kompyutery---nastrojka-na-Windows-MacOS-Linux-08-08",
         "en": "https://telegra.ph/Personal-computers---customization-on-Windows-MacOS-Linux-08-08",
-        "cn": "https://telegra.ph/%E4%B8%AA%E4%BA%BA%E7%94%B5%E8%84%91--%E5%9C%A8-WindowsMacOSLinux-%E4%B8%8A%E8%BF%9B%E8%A1%8C%E5%AE%9A%E5%88%B6-08-08"
+        "cn": "https://telegra.ph/%E4%B8%AA%E4%BA%BA%E7%94%B5%E8%84%91--%E5%9C%A8-WindowsMacOSLinux-%E4%B8%8A%E8%BF%9B%E8%A1%8C%E5%AE%9A%E5%88%B6-08-08",
     },
     "faq": {
         "ru": "https://telegra.ph/FAQ---Otvety-na-chastye-voprosy-08-08",
         "en": "https://telegra.ph/FAQ---Answers-to-Frequently-Asked-Questions-08-08",
-        "cn": "https://telegra.ph/%E5%B8%B8%E8%A6%8B%E5%95%8F%E9%A1%8C%E8%A7%A3%E7%AD%94-08-08"
+        "cn": "https://telegra.ph/%E5%B8%B8%E8%A6%8B%E5%95%8F%E9%A1%8C%E8%A7%A3%E7%AD%94-08-08",
     },
-    "connect": "ssconf://kuai.ashqua.com/"
+    "connect": "ssconf://kuai.ashqua.com/",
 }
 
 keys = {
     "onboarding": {
         "ru": "<a href='https://telegra.ph/FAQ---Otvety-na-chastye-voprosy-08-08'>Вопрос ответ для подключения</a>",
         "en": "<a href='https://telegra.ph/FAQ---Answers-to-Frequently-Asked-Questions-08-08'>FAQ for connection</a>",
-        "cn": "<a href='https://telegra.ph/%E5%B8%B8%E8%A6%8B%E5%95%8F%E9%A1%8C%E8%A7%A3%E7%AD%94-08-08'>连接常见问题解答</a>"
+        "cn": "<a href='https://telegra.ph/%E5%B8%B8%E8%A6%8B%E5%95%8F%E9%A1%8C%E8%A7%A3%E7%AD%94-08-08'>连接常见问题解答</a>",
     },
     "menu": {
         "ru": f"Подписка до: <b>$until</b>\n\nВыбраный сервер: <b>$server</b>\n\n<a href='{links['faq']['ru']}'>FAQ</a>",
@@ -34,9 +34,9 @@ keys = {
         "cn": f"订阅至：<b>$until</b>\n\n选择服务器：<b>$server</b>\n\n<a href='{links['faq']['cn']}'>FAQ</a>",
     },
     "connect_menu": {
-        "ru": f'🔑 Ваш ключ\n<code>{links["connect"]}$token</code> ( Нажми на ключ чтобы скопировать )\n\n🗒 Инструкция по подключению\n<a href="{links["guide-ios"]['ru']}">• iOS</a>\n<a href="{links["guide-android"]['ru']}">• Android</a>\n<a href="{links["guide-pc"]['ru']}">• PC</a>',
-        "en": f'🔑 Your key\n<code>{links["connect"]}$token</code> ( Click on key to copy it )\n\n🗒 Connection instructions\n<a href="{links["guide-ios"]['en']}">• iOS</a>\n<a href="{links["guide-android"]['en']}">• Android</a>\n<a href="{links["guide-pc"]['en']}">• PC</a>',
-        "cn": f'🔑 你的密钥\n<code>{links["connect"]}$token</code> ( Click on key to copy it )\n\n🗒 连接说明\n<a href="{links["guide-ios"]['cn']}">• iOS</a>\n<a href="{links["guide-android"]['cn']}">• Android</a>\n<a href="{links["guide-pc"]['cn']}">• PC</a>',
+        "ru": f"""🔑 Ваш ключ\n<code>{links["connect"]}$token</code> ( Нажми на ключ чтобы скопировать )\n\n🗒 Инструкция по подключению\n<a href="{links["guide-ios"]["ru"]}">• iOS</a>\n<a href="{links["guide-android"]["ru"]}">• Android</a>\n<a href="{links["guide-pc"]["ru"]}">• PC</a>""",
+        "en": f'🔑 Your key\n<code>{links["connect"]}$token</code> ( Click on key to copy it )\n\n🗒 Connection instructions\n<a href="{links["guide-ios"]["en"]}">• iOS</a>\n<a href="{links["guide-android"]["en"]}">• Android</a>\n<a href="{links["guide-pc"]["en"]}">• PC</a>',
+        "cn": f'🔑 你的密钥\n<code>{links["connect"]}$token</code> ( Click on key to copy it )\n\n🗒 连接说明\n<a href="{links["guide-ios"]["cn"]}">• iOS</a>\n<a href="{links["guide-android"]["cn"]}">• Android</a>\n<a href="{links["guide-pc"]["cn"]}">• PC</a>',
     },
     "buy": {
         "ru": "💳 Купить подписку",
@@ -98,6 +98,11 @@ keys = {
         "en": "⏪ Back",
         "cn": "⏪ 返回",
     },
+    "fragment": {
+        "ru": "⭐️ Как купить звезды?",
+        "en": "⭐️ How to buy stars?",
+        "cn": "⭐️ 如何购买星星？",
+    },
     "pay": {
         "ru": "💳 Оплатить",
         "en": "💳 Pay",
@@ -136,10 +141,11 @@ keys = {
 }
 
 
-
 def i18n(key: str, lang: str, **kwargs) -> str:
-    try: text = keys[key][lang]
-    except: return key
+    try:
+        text = keys[key][lang]
+    except:
+        return key
 
     for k in kwargs:
         v = kwargs[k]

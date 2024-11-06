@@ -1,0 +1,7 @@
+aiohttp
+flask
+flask-cors
+pymongo
+python-dotenv
+git+https://github.com/jadolg/outline-vpn-api.git
+haversine

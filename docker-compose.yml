@@ -1,0 +1,35 @@
+services:
+  api:
+    build: ./api
+    ports:
+      - "9127:9127"
+    env_file: .env
+    restart: unless-stopped
+    depends_on:
+      - mongodb
+    networks:
+      - vpn_network
+
+  bot:
+    build: ./bot
+    env_file: .env
+    restart: unless-stopped
+    depends_on:
+      - mongodb
+    networks:
+      - vpn_network
+
+  mongodb:
+    image: mongo:latest
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - vpn_network
+    restart: unless-stopped
+
+networks:
+  vpn_network:
+    driver: bridge
+
+volumes:
+  mongodb_data:
